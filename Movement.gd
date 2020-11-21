@@ -1,5 +1,5 @@
-extends KinematicBody2D
-#extends RigidBody2D
+#extends KinematicBody2D
+extends RigidBody2D
 
 var DEBUG_DRAW = true
 
@@ -26,8 +26,8 @@ func _physics_process(delta):
 	if velocity.length() > 0:
 		# Rotate body to point in movement direction.
 		rotation = velocity.angle()
-	#linear_velocity = velocity * speed
-	move_and_slide(velocity * speed)
+	linear_velocity = velocity * speed
+	#move_and_slide(velocity * speed)
 	update()
 		
 func set_target(value):
