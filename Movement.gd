@@ -11,9 +11,10 @@ var target = null setget set_target  # Set this to move.
 var selected = false  # Is this unit selected?
 var velocity = Vector2.ZERO
 
-#func _ready():
-	
-func _physics_process(delta):
+func _ready():
+	custom_integrator = true
+
+func _integrate_forces(state):
 	velocity = Vector2.ZERO
 	if target:
 		# If there's a target, move toward it.
