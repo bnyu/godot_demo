@@ -33,10 +33,8 @@ func _unhandled_input(event):
 			for item in selected:
 				item.collider.target = event.position
 
-	elif event is InputEventMouseMotion:
-		# Draw the box while dragging.
-		update()
-				
+
+
 func _draw():
 	if selecting:
 		draw_rect(Rect2(drag_start, get_global_mouse_position() - drag_start),Color(.5, .5, .5), false)

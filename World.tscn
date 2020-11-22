@@ -7,28 +7,28 @@
 script = ExtResource( 1 )
 
 [node name="Movement" parent="." instance=ExtResource( 2 )]
-position = Vector2( 103.238, 55.8615 )
+position = Vector2( 167.585, 94.0454 )
 
 [node name="Movement2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 162.635, 140.007 )
 
 [node name="Movement3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 128.694, 79.9033 )
+position = Vector2( 248.902, 184.555 )
 
 [node name="Movement4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 137.179, 38.8909 )
+position = Vector2( 238.296, 136.472 )
 
 [node name="Movement5" parent="." instance=ExtResource( 2 )]
-position = Vector2( 107.48, 90.5098 )
+position = Vector2( 219.203, 78.4889 )
 
 [node name="Movement6" parent="." instance=ExtResource( 2 )]
-position = Vector2( 137.886, 113.844 )
+position = Vector2( 207.183, 201.525 )
 
 [node name="Movement7" parent="." instance=ExtResource( 2 )]
-position = Vector2( 152.028, 72.8321 )
+position = Vector2( 405.88, 130.108 )
 
 [node name="Movement8" parent="." instance=ExtResource( 2 )]
-position = Vector2( 113.137, 125.865 )
+position = Vector2( 299.814, 173.948 )
 
 [node name="Movement9" parent="." instance=ExtResource( 2 )]
-position = Vector2( 173.241, 94.7524 )
+position = Vector2( 396.687, 86.2671 )
