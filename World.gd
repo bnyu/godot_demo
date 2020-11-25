@@ -4,13 +4,11 @@ var selected = []  # Array of currently selected units.
 var drag_start = Vector2.ZERO  # Location where drag began.
 var selecting = false  # start drag select.
 var select_rect = RectangleShape2D.new()  # Collision shape for drag box.
-		
+
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT:
 			if event.pressed:
-				for item in selected:
-					item.collider.selected = false
 				selected = []
 				drag_start = event.position
 				selecting = true
@@ -25,8 +23,6 @@ func _unhandled_input(event):
 				query.transform = Transform2D(0, (drag_end + drag_start) / 2)
 				# Result is an array of dictionaries. Each has a "collider" key.
 				selected = space.intersect_shape(query)
-				for item in selected:
-					item.collider.selected = true
 				update()
 		# If there is a selection, give it the target.
 		elif event.button_index == BUTTON_RIGHT:
