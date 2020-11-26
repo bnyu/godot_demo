@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 var DEBUG_DRAW = true
 
-export var speed: float = 100  # Movement speed.
+export var speed: float = 400  # Movement speed.
 
 var target_radius: float = 100  # Stop when this close to target.
 
@@ -23,7 +23,7 @@ func _ready() -> void:
 	body_radius = $Shape.shape.radius
 	move_keep_radius = $MoveSpace/Shape.shape.radius
 	rest_keep_radius = $RestSpace/Shape.shape.radius
-	target_radius = rest_keep_radius * 1.2
+	target_radius = rest_keep_radius + 10
 
 func _physics_process(_delta) -> void:
 	if to_target:
@@ -45,24 +45,26 @@ func get_going_velocity() -> Vector2:
 	return position.direction_to(target)
 
 func get_avoid_velocity() -> Vector2:
-	var result = Vector2.ZERO
-	var keep_distance: float = 0
-	var neighbors = []
 	if to_target:
-		neighbors = $MoveSpace.get_overlapping_bodies()
-		keep_distance = move_keep_radius - body_radius
+		return cal_avoid($RestSpace.get_overlapping_bodies(), rest_keep_radius) + cal_avoid($MoveSpace.get_overlapping_bodies(), move_keep_radius, true)
 	else:
-		neighbors = $RestSpace.get_overlapping_bodies()
-		keep_distance = rest_keep_radius - body_radius
-	if keep_distance > 0:
-		for n in neighbors:
-			var distance: float = n.position.distance_to(position)
-			if distance > 0:
-				var n_body_radius = body_radius #todo
-				var factor = 1 - (distance - body_radius - n_body_radius) / keep_distance
-				if factor > 0:
-					var direction = n.position.direction_to(position)
-					result += direction * factor
+		return cal_avoid($RestSpace.get_overlapping_bodies(), rest_keep_radius)
+
+func cal_avoid(neighbors: Array, space_radius: float, is_move_space: bool = false) -> Vector2:
+	var result = Vector2.ZERO
+	var keep_distance = space_radius - body_radius
+	for n in neighbors:
+		if is_move_space and not n.to_target:
+			continue
+		var distance: float = n.position.distance_to(position)
+		if distance == 0:
+			continue
+		var factor: float = 1
+		if not n.to_target and not n.no_avoid:
+			factor = 0.25
+		factor *= 1 - (distance - body_radius - n.body_radius) / keep_distance
+		if factor > 0:
+			result += n.position.direction_to(position) * factor
 	return result
 
 func set_target(value):
@@ -76,6 +78,7 @@ func _draw():
 	draw_circle(Vector2.ZERO, body_radius, Color(1, 0, 1, 0.4))
 	draw_circle(Vector2.ZERO, move_keep_radius, Color(1, 1, 0, 0.04))
 	draw_circle(Vector2.ZERO, rest_keep_radius, Color(1, 1, 0, 0.2))
+	draw_line(Vector2.ZERO, going_velocity.rotated(-rotation)*speed, Color(0, 0, 1), 2)
 	draw_line(Vector2.ZERO, avoid_velocity.rotated(-rotation)*speed, Color(1, 0, 0), 4)
-	draw_line(Vector2.ZERO, velocity.rotated(-rotation)*speed, Color(0, 1, 0), 2)
+	draw_line(Vector2.ZERO, velocity.rotated(-rotation)*speed, Color(0, 1, 0), 4)
 

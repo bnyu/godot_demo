@@ -12,6 +12,7 @@ func _unhandled_input(event):
 				selected = []
 				drag_start = event.position
 				selecting = true
+				update()
 			else:
 				selecting = false
 				var drag_end = event.position
@@ -22,7 +23,7 @@ func _unhandled_input(event):
 				query.set_shape(select_rect)
 				query.transform = Transform2D(0, (drag_end + drag_start) / 2)
 				# Result is an array of dictionaries. Each has a "collider" key.
-				selected = space.intersect_shape(query)
+				selected = space.intersect_shape(query, 1000)
 				update()
 		# If there is a selection, give it the target.
 		elif event.button_index == BUTTON_RIGHT:
