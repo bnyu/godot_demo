@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 var DEBUG_DRAW = true
 
-export var speed: float = 400  # Movement speed.
+export var speed: float = 400  # Unit2D speed.
 
 var target_radius: float = 100  # Stop when this close to target.
 
