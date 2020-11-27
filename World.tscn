@@ -32,3 +32,42 @@ position = Vector2( 252.121, 322.47 )
 
 [node name="Unit2D9" parent="." instance=ExtResource( 2 )]
 position = Vector2( 426.409, 268.796 )
+
+[node name="Unit2D10" parent="." instance=ExtResource( 2 )]
+position = Vector2( 484.675, 193.204 )
+
+[node name="Unit2D11" parent="." instance=ExtResource( 2 )]
+position = Vector2( 424.675, 207.204 )
+
+[node name="Unit2D12" parent="." instance=ExtResource( 2 )]
+position = Vector2( 457.43, 155.611 )
+
+[node name="Unit2D13" parent="." instance=ExtResource( 2 )]
+position = Vector2( 584.37, 151.755 )
+
+[node name="Unit2D14" parent="." instance=ExtResource( 2 )]
+position = Vector2( 568.268, 270.694 )
+
+[node name="Unit2D15" parent="." instance=ExtResource( 2 )]
+position = Vector2( 364.001, 196.122 )
+
+[node name="Unit2D16" parent="." instance=ExtResource( 2 )]
+position = Vector2( 425.165, 379.613 )
+
+[node name="Unit2D17" parent="." instance=ExtResource( 2 )]
+position = Vector2( 395.796, 287.674 )
+
+[node name="Unit2D18" parent="." instance=ExtResource( 2 )]
+position = Vector2( 805.801, 293.49 )
+
+[node name="Unit2D19" parent="." instance=ExtResource( 2 )]
+position = Vector2( 804.679, 361.96 )
+
+[node name="Unit2D20" parent="." instance=ExtResource( 2 )]
+position = Vector2( 804.679, 418.083 )
+
+[node name="Unit2D21" parent="." instance=ExtResource( 2 )]
+position = Vector2( 808.046, 470.839 )
+
+[node name="Unit2D22" parent="." instance=ExtResource( 2 )]
+position = Vector2( 803.556, 529.207 )
