@@ -71,3 +71,33 @@ position = Vector2( 808.046, 470.839 )
 
 [node name="Unit2D22" parent="." instance=ExtResource( 2 )]
 position = Vector2( 803.556, 529.207 )
+
+[node name="Unit2D23" parent="." instance=ExtResource( 2 )]
+position = Vector2( 519.573, 230.632 )
+
+[node name="Unit2D24" parent="." instance=ExtResource( 2 )]
+position = Vector2( 518.451, 299.102 )
+
+[node name="Unit2D25" parent="." instance=ExtResource( 2 )]
+position = Vector2( 518.451, 355.225 )
+
+[node name="Unit2D26" parent="." instance=ExtResource( 2 )]
+position = Vector2( 521.818, 407.981 )
+
+[node name="Unit2D27" parent="." instance=ExtResource( 2 )]
+position = Vector2( 517.328, 466.349 )
+
+[node name="Unit2D28" parent="." instance=ExtResource( 2 )]
+position = Vector2( 645.289, 218.285 )
+
+[node name="Unit2D29" parent="." instance=ExtResource( 2 )]
+position = Vector2( 644.167, 286.755 )
+
+[node name="Unit2D30" parent="." instance=ExtResource( 2 )]
+position = Vector2( 644.167, 342.878 )
+
+[node name="Unit2D31" parent="." instance=ExtResource( 2 )]
+position = Vector2( 647.534, 395.634 )
+
+[node name="Unit2D32" parent="." instance=ExtResource( 2 )]
+position = Vector2( 643.044, 454.002 )
