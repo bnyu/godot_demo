@@ -6,10 +6,10 @@
 radius = 32.725
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 44.0896
+radius = 42.3697
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 201.733
+radius = 119.015
 
 [node name="Unit2D" type="KinematicBody2D"]
 script = ExtResource( 1 )

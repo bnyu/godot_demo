@@ -25,10 +25,14 @@ func _ready() -> void:
 	body_radius = $Shape.shape.radius
 	move_keep_radius = $MoveSpace/Shape.shape.radius
 	rest_keep_radius = $RestSpace/Shape.shape.radius
-	target_radius = rest_keep_radius + 10
-	keep_radius = move_keep_radius + 10
+	target_radius = rest_keep_radius
+	keep_radius = move_keep_radius
 
 func _physics_process(delta) -> void:
+	move_process(delta)
+	update()
+
+func move_process(delta: float) -> void:
 	if to_target:
 		var dis = position.distance_to(target)
 		if dis < target_radius:
@@ -40,22 +44,32 @@ func _physics_process(delta) -> void:
 			if dis < keep_radius:
 				keep_dis = false
 			else:
-				going_velocity = (going_velocity + get_going_velocity()).normalized()
+				var ng = get_going_velocity()
+				if ng.length() > 0:
+					var nng = (going_velocity + ng).normalized()
+					var f = nng.dot(going_velocity)
+					if f >= 0:
+						going_velocity = nng
+					else:
+						going_velocity = nng + going_velocity * (-f)
+						
 	if no_avoid:
 		avoid_velocity = Vector2.ZERO
 	else:
 		avoid_velocity = get_avoid_velocity()
 	velocity = going_velocity + avoid_velocity
+	if to_target:
+		velocity = velocity.normalized()
 	var v_len = velocity.length()
 	if v_len > 1.01:
 		velocity = velocity.normalized()
 	if v_len > 0:
 		var collision = move_and_collide(velocity * speed * delta)
-		if to_target and collision and collision.collider and collision.collider.target == target:
-			keep_dis = false
-			to_target = false
-			going_velocity = Vector2.ZERO
-	update()
+		if collision:
+			if to_target and collision.collider and collision.collider.target == target and !collision.collider.to_target:
+				keep_dis = false
+				to_target = false
+				going_velocity = Vector2.ZERO
 
 func get_going_velocity() -> Vector2:
 	return cal_avoid($MoveSpace.get_overlapping_bodies(), move_keep_radius, true)
