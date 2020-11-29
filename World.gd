@@ -29,6 +29,10 @@ func _unhandled_input(event):
 		elif event.button_index == BUTTON_RIGHT:
 			for item in selected:
 				item.collider.target = event.position
+	elif event.is_action_pressed("ui_end"):
+			for item in selected:
+				item.collider.to_target = false
+				item.collider.target = item.collider.position
 
 
 
