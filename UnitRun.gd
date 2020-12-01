@@ -1,8 +1,8 @@
-extends KinematicBody2D
+extends KinematicBody
 
 var DEBUG_DRAW = true
 
-export var speed: float = 500  # Unit2D speed.
+export var speed: float = 10  # Unit2D speed.
 
 var target_radius: float = 100  # Stop when this close to target.
 
@@ -17,9 +17,13 @@ var going_velocity: Vector2 = Vector2.ZERO
 var avoid_velocity: Vector2 = Vector2.ZERO
 var velocity: Vector2 = Vector2.ZERO
 
+var position: Vector2 = Vector2.ZERO
+
 var no_avoid: bool = false
 
 func _ready() -> void:
+	add_to_group("units")
+	position = Vector2(translation.x, translation.z)
 	body_radius = $Shape.shape.radius
 	move_keep_radius = $MoveSpace/Shape.shape.radius
 	rest_keep_radius = $RestSpace/Shape.shape.radius
@@ -27,7 +31,8 @@ func _ready() -> void:
 
 func _physics_process(delta) -> void:
 	move_process(delta)
-	update()
+	position.x = translation.x
+	position.y = translation.z
 
 func move_process(delta: float) -> void:
 	if to_target:
@@ -35,7 +40,7 @@ func move_process(delta: float) -> void:
 			to_target = false
 			going_velocity = Vector2.ZERO
 		else:
-			going_velocity = position.direction_to(target) + get_going_velocity()/3
+			going_velocity = position.direction_to(target) + get_going_velocity()
 
 	if no_avoid:
 		avoid_velocity = Vector2.ZERO
@@ -44,12 +49,8 @@ func move_process(delta: float) -> void:
 	velocity = going_velocity + avoid_velocity
 	var v_len = velocity.length()
 	if v_len > 0:
-		var collision = move_and_collide(velocity * speed * delta)
-		if collision:
-			if to_target and collision.collider and collision.collider.target == target:
-				if !collision.collider.to_target or collision.collider.position.distance_to(target) < 2*body_radius:
-					to_target = false
-					going_velocity = Vector2.ZERO
+		var v = Vector3(velocity.x, 0, velocity.y)
+		move_and_slide(v * speed)
 
 func get_going_velocity() -> Vector2:
 	return cal_avoid($MoveSpace.get_overlapping_bodies(), move_keep_radius, true)
@@ -61,10 +62,14 @@ func cal_avoid(neighbors: Array, space_radius: float, is_move_space: bool = fals
 	var result = Vector2.ZERO
 	var keep_distance = space_radius - body_radius
 	for n in neighbors:
+		if n == self:
+			continue
+		if n is StaticBody:
+			continue
 		if is_move_space and not n.to_target:
 			continue
 		var distance: float = n.position.distance_to(position)
-		if distance == 0:
+		if distance <= 0:
 			continue
 		var factor: float = 1
 		if not n.to_target and not n.no_avoid:
@@ -77,15 +82,3 @@ func cal_avoid(neighbors: Array, space_radius: float, is_move_space: bool = fals
 func set_target(value):
 	target = value
 	to_target = true
-
-func _draw():
-	# Draws some debug vectors.
-	if !DEBUG_DRAW:
-		return
-	draw_circle(Vector2.ZERO, body_radius, Color(1, 0, 1, 0.4))
-	#draw_circle(Vector2.ZERO, move_keep_radius, Color(1, 1, 0, 0.04))
-	#draw_circle(Vector2.ZERO, rest_keep_radius, Color(1, 1, 0, 0.2))
-	#draw_line(Vector2.ZERO, going_velocity.rotated(-rotation)*speed, Color(0, 0, 1), 2)
-	#draw_line(Vector2.ZERO, avoid_velocity.rotated(-rotation)*speed, Color(1, 0, 0), 4)
-	#draw_line(Vector2.ZERO, velocity.rotated(-rotation)*speed, Color(0, 1, 0), 4)
-

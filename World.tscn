@@ -1,139 +1,48 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://World.gd" type="Script" id=1]
-[ext_resource path="res://Unit2D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UnitRun.tscn" type="PackedScene" id=1]
+[ext_resource path="res://CamCon.gd" type="Script" id=3]
+[ext_resource path="res://Control.gd" type="Script" id=4]
 
-[node name="World" type="Node2D"]
-script = ExtResource( 1 )
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 64, 1, 64 )
 
-[node name="Unit2D" parent="." instance=ExtResource( 2 )]
-position = Vector2( 341, 228 )
+[node name="Main" type="Spatial"]
 
-[node name="Unit2D3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 313.755, 190.407 )
+[node name="World" type="Spatial" parent="."]
 
-[node name="Unit2D4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 432.838, 171.959 )
+[node name="UnitRun" parent="World" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00866, 1.02667, 1.24281 )
 
-[node name="Unit2D5" parent="." instance=ExtResource( 2 )]
-position = Vector2( 424.593, 305.49 )
+[node name="CSGBox" type="CSGBox" parent="World/UnitRun"]
 
-[node name="Unit2D9" parent="." instance=ExtResource( 2 )]
-position = Vector2( 418.552, 254.204 )
+[node name="UnitRun2" parent="World" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.79751, 1.02667, -2.06534 )
 
-[node name="Unit2D10" parent="." instance=ExtResource( 2 )]
-position = Vector2( 476.818, 178.612 )
+[node name="CSGBox" type="CSGBox" parent="World/UnitRun2"]
 
-[node name="Unit2D11" parent="." instance=ExtResource( 2 )]
-position = Vector2( 416.818, 192.612 )
+[node name="UnitRun3" parent="World" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.53176, 0.993331, -2.06534 )
 
-[node name="Unit2D15" parent="." instance=ExtResource( 2 )]
-position = Vector2( 364.001, 196.122 )
+[node name="CSGBox" type="CSGBox" parent="World/UnitRun3"]
 
-[node name="Unit2D17" parent="." instance=ExtResource( 2 )]
-position = Vector2( 395.796, 287.674 )
+[node name="Ground" type="StaticBody" parent="."]
+collision_layer = 2
 
-[node name="Unit2D33" parent="." instance=ExtResource( 2 )]
-position = Vector2( 324.163, 286.368 )
+[node name="CollisionShape" type="CollisionShape" parent="Ground"]
+shape = SubResource( 1 )
 
-[node name="Unit2D36" parent="." instance=ExtResource( 2 )]
-position = Vector2( 416.001, 230.327 )
+[node name="CamCon" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.07932, 0 )
+script = ExtResource( 3 )
 
-[node name="Unit2D41" parent="." instance=ExtResource( 2 )]
-position = Vector2( 409.572, 327.164 )
+[node name="Camera" type="Camera" parent="CamCon"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 45 )
 
-[node name="Unit2D42" parent="." instance=ExtResource( 2 )]
-position = Vector2( 459.981, 236.98 )
-
-[node name="Unit2D43" parent="." instance=ExtResource( 2 )]
-position = Vector2( 399.981, 250.98 )
-
-[node name="Unit2D44" parent="." instance=ExtResource( 2 )]
-position = Vector2( 432.736, 199.387 )
-
-[node name="Unit2D47" parent="." instance=ExtResource( 2 )]
-position = Vector2( 347.164, 254.49 )
-
-[node name="Unit2D49" parent="." instance=ExtResource( 2 )]
-position = Vector2( 378.959, 346.042 )
-
-[node name="Unit2D2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 300.591, 220.143 )
-
-[node name="Unit2D6" parent="." instance=ExtResource( 2 )]
-position = Vector2( 285.693, 317.245 )
-
-[node name="Unit2D7" parent="." instance=ExtResource( 2 )]
-position = Vector2( 392.429, 164.102 )
-
-[node name="Unit2D8" parent="." instance=ExtResource( 2 )]
-position = Vector2( 384.184, 297.633 )
-
-[node name="Unit2D12" parent="." instance=ExtResource( 2 )]
-position = Vector2( 378.143, 246.347 )
-
-[node name="Unit2D13" parent="." instance=ExtResource( 2 )]
-position = Vector2( 436.409, 170.755 )
-
-[node name="Unit2D14" parent="." instance=ExtResource( 2 )]
-position = Vector2( 399.981, 220.674 )
-
-[node name="Unit2D16" parent="." instance=ExtResource( 2 )]
-position = Vector2( 323.592, 188.265 )
-
-[node name="Unit2D18" parent="." instance=ExtResource( 2 )]
-position = Vector2( 355.387, 279.817 )
-
-[node name="Unit2D34" parent="." instance=ExtResource( 2 )]
-position = Vector2( 283.754, 278.511 )
-
-[node name="Unit2D37" parent="." instance=ExtResource( 2 )]
-position = Vector2( 375.592, 222.47 )
-
-[node name="Unit2D45" parent="." instance=ExtResource( 2 )]
-position = Vector2( 369.163, 319.307 )
-
-[node name="Unit2D46" parent="." instance=ExtResource( 2 )]
-position = Vector2( 419.572, 229.123 )
-
-[node name="Unit2D48" parent="." instance=ExtResource( 2 )]
-position = Vector2( 367.429, 257.715 )
-
-[node name="Unit2D50" parent="." instance=ExtResource( 2 )]
-position = Vector2( 392.327, 191.53 )
-
-[node name="Unit2D51" parent="." instance=ExtResource( 2 )]
-position = Vector2( 306.755, 246.633 )
-
-[node name="Unit2D19" parent="." instance=ExtResource( 2 )]
-position = Vector2( 349.98, 309.94 )
-
-[node name="Unit2D38" parent="." instance=ExtResource( 2 )]
-position = Vector2( 424.981, 312.267 )
-
-[node name="Unit2D53" parent="." instance=ExtResource( 2 )]
-position = Vector2( 468.961, 318.92 )
-
-[node name="Unit2D54" parent="." instance=ExtResource( 2 )]
-position = Vector2( 408.961, 332.92 )
-
-[node name="Unit2D20" parent="." instance=ExtResource( 2 )]
-position = Vector2( 309.571, 302.082 )
-
-[node name="Unit2D21" parent="." instance=ExtResource( 2 )]
-position = Vector2( 387.123, 328.286 )
-
-[node name="Unit2D22" parent="." instance=ExtResource( 2 )]
-position = Vector2( 408.961, 302.613 )
-
-[node name="Unit2D39" parent="." instance=ExtResource( 2 )]
-position = Vector2( 384.572, 304.409 )
-
-[node name="Unit2D55" parent="." instance=ExtResource( 2 )]
-position = Vector2( 428.552, 311.062 )
-
-[node name="Unit2D56" parent="." instance=ExtResource( 2 )]
-position = Vector2( 315.735, 328.572 )
-
-[node name="Unit2D52" parent="." instance=ExtResource( 2 )]
-position = Vector2( 338.55, 338.185 )
+[node name="Control" type="Control" parent="CamCon"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
